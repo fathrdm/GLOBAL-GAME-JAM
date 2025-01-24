@@ -18,7 +18,7 @@ public class MainMenuManager : MonoBehaviour
         levelSelection.SetActive(false);
         Setting.SetActive(false);
 
-        audioSource = GameObject.Find("AudioManager").GetComponent<AudioSource>();
+        //audioSource = GameObject.Find("AudioManager").GetComponent<AudioSource>();
 
         if (GameData.instance.isMusicOn)
         {
