@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-using UnityEngine.UI;
 public class MainMenuManager : MonoBehaviour
 {
     [Header("Main Menu Panel List")]
@@ -57,27 +56,32 @@ public class MainMenuManager : MonoBehaviour
     {
         //GameData.instance.isSinglePlayer = true;
         levelSelection.SetActive(true);
-        SoundManager.instance.UIClickSfx();
+        MainMenuPanel.SetActive(false);
+        //SoundManager.instance.UIClickSfx();
     }
 
-    public void BackButton()
+    public void Settings()
     {
-        levelSelection.SetActive(false);
-        SoundManager.instance.UIClickSfx();
+        Setting.SetActive(true);
+        MainMenuPanel.SetActive(false);
+        //SoundManager.instance.UIClickSfx();
 
     }
-    public void SelectBallButton()
-    {
-        SoundManager.instance.UIClickSfx();
-    }
-
 
     public void PlayButton()
     {
         SceneManager.LoadScene("Level 1");
-        SoundManager.instance.UIClickSfx();
+        //SoundManager.instance.UIClickSfx();
     }
+    public void BackButton()
+    {
+        MainMenuPanel.SetActive(true);
+        levelSelection.SetActive(false);
+        Setting.SetActive(false);
 
+        //SoundManager.instance.UIClickSfx();
+
+    }
     public void ExitGame()
     {
         Application.Quit();

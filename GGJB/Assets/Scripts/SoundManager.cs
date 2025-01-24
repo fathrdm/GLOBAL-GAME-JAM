@@ -1,49 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager instance;
+    [SerializeField] Slider volumeSlider;
 
-    public AudioClip uiButton;
-    public AudioClip ballBounce;
-    public AudioClip goal;
-    public AudioClip gameOver;
-
-    private new AudioSource audio;
-    // Start is called before the first frame update
-
-    public void Awake()
+    void Start()
     {
-        if (instance != null)
+        if (PlayerPrefs.HasKey("musicVolume"))
         {
-            Destroy(gameOver);
+            PlayerPrefs.SetFloat("musicVolume", 1);
+            load();
         }
         else
         {
-            instance = this;
-            audio = GetComponent<AudioSource>();
+            load();
         }
     }
 
-    public void UIClickSfx()
+    public void ChangeVolume()
     {
-        audio.PlayOneShot(uiButton);
+        AudioListener.volume = volumeSlider.value;
+        save();
     }
 
-    public void BallBounceSfx()
+    public void load()
     {
-        audio.PlayOneShot(ballBounce);
+        volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
     }
 
-    public void GoalSfx()
+    public void save()
     {
-        audio.PlayOneShot(goal);
-    }
-
-    public void GameOverSfx()
-    {
-        audio.PlayOneShot(gameOver);
+        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
     }
 }
