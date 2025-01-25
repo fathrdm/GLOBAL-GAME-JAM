@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject GameOverPanel;
     [SerializeField] GameObject settingsMenuPanel;
 
+    public string gameState = "play";
+    public Shooter shootScript;
     private const int SEQUENCE_SIZE = 3; // Jumlah bubble minimum untuk meledak
 
     private List<Transform> sequenceBubbles; // Menyimpan bubble dalam sequence

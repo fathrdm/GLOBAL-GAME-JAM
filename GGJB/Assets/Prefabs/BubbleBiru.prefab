@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3559357834059595060}
   - component: {fileID: 6892919978380078108}
   m_Layer: 0
-  m_Name: Bubble
+  m_Name: BubbleBiru
   m_TagString: Bubble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.16567612, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,10 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8ed9952dbfce34bb87aaebd783d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raycastRange: 0.15
-  raycastOffset: 0.6
+  raycastRange: 0.1
+  raycastOffset: 0.4
   isFixed: 0
-  bubbleColor: 2
+  isConnected: 0
+  bubbleColor: 0
 --- !u!50 &3559357834059595060
 Rigidbody2D:
   serializedVersion: 4
@@ -119,7 +120,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: c7aba1ee185c4624bbcefb897c84181d, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
