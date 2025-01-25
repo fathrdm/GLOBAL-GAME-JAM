@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38655af68bcc5f64788a1ed23d40fcf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bubblesArea: {fileID: 1147393676}
+  bubblesArea: {fileID: 2112991074}
   grid: {fileID: 70119749}
   bubblesInScene: []
   colorsInScene: []
@@ -757,14 +757,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0721cc0c1859b934d9afcb46eb05ca09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentObject: {fileID: 2112991073}
   isOver: 0
   isPause: 0
   PausePanel: {fileID: 825474010}
+  GameOverPanel: {fileID: 0}
   settingsMenuPanel: {fileID: 1237162303}
   continuePanel: {fileID: 1362871905}
   gameOverLimit: {fileID: 705078481}
   gameState: play
-  shootScript: {fileID: 0}
 --- !u!1 &345861949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,7 +1512,7 @@ Transform:
   m_GameObject: {fileID: 1147393675}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.14, y: 2.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3085,6 +3086,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2112991073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3771586553768646691, guid: a06126f841a50764f8f5da6e9347de17, type: 3}
+  m_PrefabInstance: {fileID: 1453841235}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2112991074 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5694443212442945057, guid: a06126f841a50764f8f5da6e9347de17, type: 3}
+  m_PrefabInstance: {fileID: 1453841235}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2136690428
 GameObject:
   m_ObjectHideFlags: 0

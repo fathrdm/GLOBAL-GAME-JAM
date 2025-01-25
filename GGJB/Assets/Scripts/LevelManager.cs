@@ -48,7 +48,7 @@ public class LevelManager : MonoBehaviour
         SnapChildrensToGrid(bubblesArea);
         UpdateListOfBubblesInScene();
 
-        GameManager.instance.shootScript.CreateNewBubbles();
+        //GameManager.instance.shootScript.CreateNewBubbles();
     }
 
     /// <summary>

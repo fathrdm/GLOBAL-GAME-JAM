@@ -773,6 +773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0721cc0c1859b934d9afcb46eb05ca09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentObject: {fileID: 7895915552445185073}
   isOver: 0
   isPause: 0
   PausePanel: {fileID: 825474010}
@@ -781,7 +782,6 @@ MonoBehaviour:
   continuePanel: {fileID: 2104033207168779769, guid: 8582cb6e83ba3ef43b7e34041c1ee47f, type: 3}
   gameOverLimit: {fileID: 705078481}
   gameState: play
-  shootScript: {fileID: 0}
 --- !u!114 &311718797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4111,6 +4111,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf22d2204120c5443882963d70958930, type: 3}
+--- !u!1 &7895915552445185073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6705054569484422538, guid: cf22d2204120c5443882963d70958930, type: 3}
+  m_PrefabInstance: {fileID: 7895915552445185072}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

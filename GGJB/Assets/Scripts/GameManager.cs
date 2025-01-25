@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance; // Singleton untuk akses global
+    public GameObject parentObject;
 
     [Header("Game Setting")]
     public bool isOver;
@@ -21,11 +22,14 @@ public class GameManager : MonoBehaviour
     public Transform gameOverLimit; // Transform yang menentukan batas kekalahan
 
     public string gameState = "play";
-    public Shooter shootScript;
+    //public Shooter shootScript;
     private const int SEQUENCE_SIZE = 3; // Jumlah bubble minimum untuk meledak
 
     private List<Transform> sequenceBubbles; // Menyimpan bubble dalam sequence
     private List<Transform> bubblesToDrop = new List<Transform>(); // Menyimpan bubble yang akan jatuh
+
+    private List<Transform> activeBubbles = new List<Transform>(); // Daftar bubble yang ada di permainan
+    
 
     private void Awake()
     {
@@ -46,17 +50,45 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         // Buat panel
         PausePanel.SetActive(false);
-        //GameOverPanel.SetActive(false);
         settingsMenuPanel.SetActive(false);
         continuePanel.SetActive(false);
+        GameOverPanel.SetActive(false); 
         isPause = false;
         isOver = false;
+
+        if (parentObject == null)
+        {
+            Debug.LogWarning("Parent object is not assigned!");
+            return;
+        }
+
+        continuePanel.SetActive(false); // Ensure the panel is initially hidden
+        
     }
 
     private void Update()
     {
         GamePause();
         CheckGameOverCondition(); // Periksa kondisi kekalahan setiap frame
+                                  //CheckWinCondition(); // Periksa kondisi kemenangan setiap frame
+        if (parentObject == null) return;
+
+        int childCount = parentObject.transform.childCount;
+        Debug.Log($"Remaining children of {parentObject.name}: {childCount}");
+
+        CheckWinCondition(childCount);
+    }
+
+   
+
+    public void RegisterBubble(Transform bubble)
+    {
+        activeBubbles.Add(bubble);
+    }
+
+    public void UnregisterBubble(Transform bubble)
+    {
+        activeBubbles.Remove(bubble);
     }
 
     public void GamePause()
@@ -113,27 +145,25 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
+
     public void continuee()
     {
         Time.timeScale = 0;
         continuePanel.SetActive(true);
     }
+
     public void ContinueUnlockLevel()
     {
- 
         SceneManager.LoadScene("Level 2");
 
-        if(SceneManager.GetActiveScene().buildIndex >= PlayerPrefs.GetInt("ReachedIndex"))
+        if (SceneManager.GetActiveScene().buildIndex >= PlayerPrefs.GetInt("ReachedIndex"))
         {
             PlayerPrefs.SetInt("ReachedIndex", SceneManager.GetActiveScene().buildIndex + 1);
             PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
             PlayerPrefs.Save();
-
         }
-
     }
 
-    // Mengecek bubble yang bersentuhan untuk sequence
     public void ProcessTurn(Transform currentBubble)
     {
         StartCoroutine(CheckSequence(currentBubble));
@@ -152,6 +182,7 @@ public class GameManager : MonoBehaviour
         {
             foreach (Transform bubble in sequenceBubbles)
             {
+                UnregisterBubble(bubble);
                 Destroy(bubble.gameObject); // Hapus bubble dari game
             }
         }
@@ -159,7 +190,6 @@ public class GameManager : MonoBehaviour
         sequenceBubbles.Clear(); // Reset sequence untuk turn berikutnya
     }
 
-    // Rekursif untuk mengecek bubble dengan warna yang sama
     private void CheckBubbleSequence(Transform currentBubble)
     {
         sequenceBubbles.Add(currentBubble);
@@ -180,7 +210,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Mengecek dan menghapus bubble yang tidak terhubung
     private IEnumerator ProcessDisconnectedBubbles()
     {
         yield return new WaitForSeconds(0.1f); // Tunggu sebentar sebelum memproses
@@ -192,7 +221,7 @@ public class GameManager : MonoBehaviour
 
     private void SetAllBubblesConnectionToFalse()
     {
-        foreach (Transform bubble in LevelManager.instance.bubblesArea)
+        foreach (Transform bubble in activeBubbles)
         {
             bubble.GetComponent<Bubble>().isConnected = false;
         }
@@ -202,7 +231,7 @@ public class GameManager : MonoBehaviour
     {
         Queue<Transform> queue = new Queue<Transform>();
 
-        foreach (Transform bubble in LevelManager.instance.bubblesArea)
+        foreach (Transform bubble in activeBubbles)
         {
             Bubble bubbleScript = bubble.GetComponent<Bubble>();
             if (bubbleScript.isFixed)
@@ -233,7 +262,7 @@ public class GameManager : MonoBehaviour
     {
         bubblesToDrop.Clear();
 
-        foreach (Transform bubble in LevelManager.instance.bubblesArea)
+        foreach (Transform bubble in activeBubbles)
         {
             Bubble bubbleScript = bubble.GetComponent<Bubble>();
             if (!bubbleScript.isConnected)
@@ -244,6 +273,7 @@ public class GameManager : MonoBehaviour
 
         foreach (Transform bubble in bubblesToDrop)
         {
+            UnregisterBubble(bubble);
             bubble.SetParent(null);
             Rigidbody2D rb = bubble.gameObject.AddComponent<Rigidbody2D>();
             rb.gravityScale = 1; // Atur gravitasi untuk bubble jatuh
@@ -251,10 +281,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Mengecek apakah bubble mencapai batas kekalahan
     private void CheckGameOverCondition()
     {
-        foreach (Transform bubble in LevelManager.instance.bubblesArea)
+        foreach (Transform bubble in activeBubbles)
         {
             if (bubble.position.y <= gameOverLimit.position.y)
             {
@@ -264,12 +293,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Menangani kondisi kekalahan
     private void GameOver()
     {
         isOver = true;
         Time.timeScale = 0;
         GameOverPanel.SetActive(true);
         Debug.Log("Game Over! Bubbles reached the limit.");
+    }
+
+    private void CheckWinCondition(int childCount)
+    {
+        if (childCount == 0)
+        {
+            Win();
+        }
+    }
+
+    private void Win()
+    {
+        Time.timeScale = 0;
+        continuePanel.SetActive(true);
+        Debug.Log("You Win! All bubbles are cleared.");
     }
 }
