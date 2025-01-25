@@ -10,7 +10,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private Slider SFXSlider;
     public AudioSource audioSource;
-    public AudioSource sfxAudioSource; 
+    public AudioSource sfxAudioSource;
+
+    private float musicVolume = 0.5f; 
+    private float sfxVolume = 0.5f;   
+
     private void Awake()
     {
         if (instance != null)
@@ -24,49 +28,73 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
-        if (!PlayerPrefs.HasKey("musicVolume"))
-        {
-            PlayerPrefs.SetFloat("musicVolume", 1);
-        }
-
-        if (!PlayerPrefs.HasKey("sfxVolume"))
-        {
-            PlayerPrefs.SetFloat("sfxVolume", 1);
-        }
-        load();
+        ApplyVolumeSettings();
     }
 
     public void ChangeVolume()
     {
-        float volume = volumeSlider.value;
-        audioSource.volume = volume;
-        saveVolume();
+        if (volumeSlider != null)
+        {
+            musicVolume = volumeSlider.value; 
+            if (audioSource != null)
+            {
+                audioSource.volume = musicVolume;
+            }
+        }
     }
+
     public void ChangeSFX()
     {
-        float sfx = SFXSlider.value;
-        sfxAudioSource.volume = sfx;
-        saveSFX();
-    }
-    public void load()
-    {
-        float savedVolume = PlayerPrefs.GetFloat("musicVolume");
-        volumeSlider.value = savedVolume;
-        audioSource.volume = savedVolume;
-
-        float savedSFX = PlayerPrefs.GetFloat("sfxVolume");
-        SFXSlider.value = savedSFX;
-        sfxAudioSource.volume = savedSFX;
+        if (SFXSlider != null)
+        {
+            sfxVolume = SFXSlider.value; 
+            if (sfxAudioSource != null)
+            {
+                sfxAudioSource.volume = sfxVolume;
+            }
+        }
     }
 
-    public void saveVolume()
+    public void UpdateSliders(Slider newVolumeSlider, Slider newSFXSlider)
     {
-        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
-       }
-    public void saveSFX()
+        volumeSlider = newVolumeSlider;
+        SFXSlider = newSFXSlider;
+
+        ApplyVolumeSettings();
+
+        if (volumeSlider != null)
+        {
+            volumeSlider.onValueChanged.AddListener(delegate { ChangeVolume(); });
+        }
+
+        if (SFXSlider != null)
+        {
+            SFXSlider.onValueChanged.AddListener(delegate { ChangeSFX(); });
+        }
+    }
+
+    private void ApplyVolumeSettings()
     {
-        PlayerPrefs.SetFloat("sfxVolume", SFXSlider.value);
+        if (volumeSlider != null)
+        {
+            volumeSlider.value = musicVolume;
+        }
+
+        if (audioSource != null)
+        {
+            audioSource.volume = musicVolume;
+        }
+
+        if (SFXSlider != null)
+        {
+            SFXSlider.value = sfxVolume;
+        }
+
+        if (sfxAudioSource != null)
+        {
+            sfxAudioSource.volume = sfxVolume;
+        }
     }
 }

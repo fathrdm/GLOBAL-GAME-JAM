@@ -48,11 +48,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void LevelSelection()
     {
-        if (sfxmanager != null)
-        {
-            Debug.Log("Playing UI Click SFX");
-            sfxmanager.UIClickSfx();
-        }
+        sfxmanager.UIClickSfx();
         levelSelection.SetActive(true);
         MainMenuPanel.SetActive(false);
     }
@@ -70,11 +66,9 @@ public class MainMenuManager : MonoBehaviour
     }
     public void BackButton()
     {
- 
-            MainMenuPanel.SetActive(true);
-            levelSelection.SetActive(false);
-            Setting.SetActive(false);
-        
+          MainMenuPanel.SetActive(true);
+          levelSelection.SetActive(false);
+          Setting.SetActive(false);
     }
     public void ExitGame()
     {
