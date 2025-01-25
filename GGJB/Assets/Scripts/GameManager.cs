@@ -13,8 +13,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Panels")]
     [SerializeField] GameObject PausePanel;
-    [SerializeField] GameObject GameOverPanel;
+    private GameObject GameOverPanel;
     [SerializeField] GameObject settingsMenuPanel;
+    [SerializeField] GameObject continuePanel;
 
     [Header("Game Over Settings")]
     public Transform gameOverLimit; // Transform yang menentukan batas kekalahan
@@ -45,8 +46,9 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         // Buat panel
         PausePanel.SetActive(false);
-        GameOverPanel.SetActive(false);
+        //GameOverPanel.SetActive(false);
         settingsMenuPanel.SetActive(false);
+        continuePanel.SetActive(false);
         isPause = false;
         isOver = false;
     }
@@ -110,6 +112,25 @@ public class GameManager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+    public void continuee()
+    {
+        Time.timeScale = 0;
+        continuePanel.SetActive(true);
+    }
+    public void ContinueUnlockLevel()
+    {
+ 
+        SceneManager.LoadScene("Level 2");
+
+        if(SceneManager.GetActiveScene().buildIndex >= PlayerPrefs.GetInt("ReachedIndex"))
+        {
+            PlayerPrefs.SetInt("ReachedIndex", SceneManager.GetActiveScene().buildIndex + 1);
+            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
+            PlayerPrefs.Save();
+
+        }
+
     }
 
     // Mengecek bubble yang bersentuhan untuk sequence
