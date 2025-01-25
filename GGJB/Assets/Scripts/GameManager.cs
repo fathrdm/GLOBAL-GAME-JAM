@@ -81,8 +81,8 @@ public class GameManager : MonoBehaviour
     }
     public void GameResume()
     {
-        PausePanel.SetActive(false);
-        Time.timeScale = 1;
+            PausePanel.SetActive(false);
+            Time.timeScale = 1;  
         //SoundManager.instance.UIClickSfx();
 
     }

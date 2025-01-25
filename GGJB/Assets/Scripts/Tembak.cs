@@ -12,7 +12,6 @@ public class Tembak : MonoBehaviour
     private float timer;
     public float timeBetweenFiring = 0.5f;
     public float shootForce = 10f; // Kecepatan bubble
-
     private void Start()
     {
         mainCam = Camera.main;
@@ -20,6 +19,7 @@ public class Tembak : MonoBehaviour
 
     private void Update()
     {
+
         // Ambil posisi mouse
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
 
