@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioSFXManager : MonoBehaviour
+public class SFXManager: MonoBehaviour
 {
-    public static AudioSFXManager instance;
+    //public static SFXManager instance;
 
     public AudioClip uiButton;
     public AudioClip ballBounce;
@@ -14,17 +14,22 @@ public class AudioSFXManager : MonoBehaviour
     private new AudioSource audio;
     // Start is called before the first frame update
 
-    public void Awake()
+    //public void Awake()
+    //{
+    //    if (instance != null)
+    //    {
+    //        Destroy(gameOver);
+    //    }
+    //    else
+    //    {
+    //        instance = this;
+    //        audio = GetComponent<AudioSource>();
+    //    }
+    //}
+
+    private void Start()
     {
-        if (instance != null)
-        {
-            Destroy(gameOver);
-        }
-        else
-        {
-            instance = this;
-            audio = GetComponent<AudioSource>();
-        }
+        audio = GetComponent<AudioSource>();
     }
 
     public void UIClickSfx()

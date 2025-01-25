@@ -10,13 +10,14 @@ public class MainMenuManager : MonoBehaviour
     public GameObject Setting;
     public GameObject levelSelection;
     private AudioSource audioSource;
-
+    private SFXManager sfxmanager;
     void Start()
     {
 
         MainMenuPanel.SetActive(true);
         levelSelection.SetActive(false);
         Setting.SetActive(false);
+        sfxmanager = FindObjectOfType<SFXManager>();
 
         //audioSource = GameObject.Find("AudioManager").GetComponent<AudioSource>();
 
@@ -47,7 +48,11 @@ public class MainMenuManager : MonoBehaviour
 
     public void LevelSelection()
     {
-
+        if (sfxmanager != null)
+        {
+            Debug.Log("Playing UI Click SFX");
+            sfxmanager.UIClickSfx();
+        }
         levelSelection.SetActive(true);
         MainMenuPanel.SetActive(false);
     }
