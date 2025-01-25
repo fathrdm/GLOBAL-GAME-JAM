@@ -8,14 +8,14 @@ public class MainMenuManager : MonoBehaviour
     [Header("Main Menu Panel List")]
     public GameObject MainMenuPanel;
     public GameObject Setting;
-    public GameObject levelSelection;
+    private GameObject levelSelection;
     private AudioSource audioSource;
     private SFXManager sfxmanager;
     void Start()
     {
 
         MainMenuPanel.SetActive(true);
-        levelSelection.SetActive(false);
+        //levelSelection.SetActive(false);
         Setting.SetActive(false);
         sfxmanager = FindObjectOfType<SFXManager>();
 
@@ -67,7 +67,7 @@ public class MainMenuManager : MonoBehaviour
     public void BackButton()
     {
           MainMenuPanel.SetActive(true);
-          levelSelection.SetActive(false);
+          //levelSelection.SetActive(false);
           Setting.SetActive(false);
     }
     public void ExitGame()
