@@ -74,7 +74,6 @@ public class GameManager : MonoBehaviour
         if (parentObject == null) return;
 
         int childCount = parentObject.transform.childCount;
-        Debug.Log($"Remaining children of {parentObject.name}: {childCount}");
 
         CheckWinCondition(childCount);
     }
@@ -138,6 +137,7 @@ public class GameManager : MonoBehaviour
     public void Settings()
     {
         Time.timeScale = 0;
+        PausePanel.SetActive(false);
         settingsMenuPanel.SetActive(true);
     }
 
@@ -149,6 +149,7 @@ public class GameManager : MonoBehaviour
     public void continuee()
     {
         Time.timeScale = 0;
+        PausePanel.SetActive(false);
         continuePanel.SetActive(true);
     }
 
