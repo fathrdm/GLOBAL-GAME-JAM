@@ -1,10 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance; // Singleton untuk akses global
+
+    [Header("Game Setting")]
+    public bool isOver;
+    public bool isPause;
+
+    [Header("Panels")]
+    [SerializeField] GameObject PausePanel;
+    [SerializeField] GameObject GameOverPanel;
+
     private const int SEQUENCE_SIZE = 3; // Jumlah bubble minimum untuk meledak
 
     private List<Transform> sequenceBubbles; // Menyimpan bubble dalam sequence
@@ -12,12 +22,83 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
             instance = this;
+        }
 
         sequenceBubbles = new List<Transform>();
     }
 
+    private void Start()
+    {
+        Time.timeScale = 1;
+        //buat panel
+        PausePanel.SetActive(false);
+        GameOverPanel.SetActive(false);
+        isPause = false;
+
+        isOver = false;
+
+    }
+
+    private void Update()
+    {
+        GamePause();
+    }
+    public void GamePause()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            isPause = !isPause;
+
+            if (isPause)
+            {
+                Time.timeScale = 0;
+                PausePanel.SetActive(true);
+            }
+            else
+            {
+                Time.timeScale = 1;
+                PausePanel.SetActive(false);
+            }
+            
+ 
+        }
+
+        //SoundManager.instance.UIClickSfx();
+
+    }
+    public void Restart()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Level 1");
+        //SoundManager.instance.UIClickSfx();
+
+    }
+    public void GameResume()
+    {
+        PausePanel.SetActive(false);
+        Time.timeScale = 1;
+        //SoundManager.instance.UIClickSfx();
+
+    }
+
+    public void BackToMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Main Menu");
+        //SoundManager.instance.UIClickSfx();
+
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
     // Mengecek bubble yang bersentuhan untuk sequence
     public void ProcessTurn(Transform currentBubble)
     {

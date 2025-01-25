@@ -20,14 +20,14 @@ public class MainMenuManager : MonoBehaviour
 
         //audioSource = GameObject.Find("AudioManager").GetComponent<AudioSource>();
 
-        if (GameData.instance.isMusicOn)
-        {
-            audioSource.Play();
-        }
-        else
-        {
-            audioSource.Pause();
-        }
+        //if (GameData.instance.isMusicOn)
+        //{
+        //    audioSource.Play();
+        //}
+        //else
+        //{
+        //    audioSource.Pause();
+        //}
 
     }
     public void ToggleMusic()
