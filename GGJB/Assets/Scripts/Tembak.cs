@@ -19,22 +19,17 @@ public class Tembak : MonoBehaviour
 
     [Header("Aiming Line")]
     public LineRenderer aimLine; // LineRenderer untuk aiming
-    public LineRenderer trajectoryLine; // LineRenderer untuk visualisasi trajectory
-    public int trajectoryResolution = 50; // Resolusi trajectory
+    public int lineSortingOrder = -1; // Sorting order untuk memastikan garis di bawah bubble
 
     private void Start()
     {
         mainCam = Camera.main;
         UpdateAvailableColors();
 
-        // Pastikan LineRenderer diatur
         if (aimLine != null)
         {
             aimLine.positionCount = 2;
-        }
-        if (trajectoryLine != null)
-        {
-            trajectoryLine.positionCount = trajectoryResolution;
+            aimLine.sortingOrder = lineSortingOrder; // Atur sorting order untuk layer
         }
     }
 
@@ -60,11 +55,11 @@ public class Tembak : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             ShowAimingLine();
-            ShowTrajectory();
+            UpdatePreviewBubblePosition();
         }
         else
         {
-            ClearAimingAndTrajectory();
+            ClearAimingLine();
         }
 
         if (Input.GetMouseButtonDown(0) && canFire)
@@ -77,66 +72,43 @@ public class Tembak : MonoBehaviour
             canFire = false;
             ShootBubble();
             Destroy(previewBubble);
-            ClearAimingAndTrajectory();
+            ClearAimingLine();
             UpdateAvailableColors();
         }
     }
 
     private void ShowAimingLine()
     {
-        if (aimLine == null) return;
+        if (aimLine == null || previewBubble == null) return;
 
+        // Atur posisi garis
         aimLine.SetPosition(0, shootPoint.position);
         aimLine.SetPosition(1, mousePos);
+
+        // Sinkronkan warna garis dengan warna SpriteRenderer preview bubble
+        SpriteRenderer previewRenderer = previewBubble.GetComponent<SpriteRenderer>();
+        if (previewRenderer != null)
+        {
+            Color previewColor = previewRenderer.color;
+            aimLine.startColor = previewColor; // Warna awal garis
+            aimLine.endColor = previewColor;   // Warna akhir garis
+        }
+        else
+        {
+            // Fallback warna garis jika tidak ada SpriteRenderer
+            aimLine.startColor = Color.white;
+            aimLine.endColor = Color.white;
+        }
+
         aimLine.enabled = true;
     }
 
-    private void ShowTrajectory()
-    {
-        if (trajectoryLine == null || selectedPrefab == null) return;
 
-        Vector3[] trajectoryPoints = CalculateTrajectoryPoints(shootPoint.position, transform.up * shootForce, trajectoryResolution);
-        trajectoryLine.positionCount = trajectoryPoints.Length;
-        trajectoryLine.SetPositions(trajectoryPoints);
-        trajectoryLine.enabled = true;
-    }
-
-    private Vector3[] CalculateTrajectoryPoints(Vector3 startPosition, Vector3 velocity, int resolution)
-    {
-        Vector3[] points = new Vector3[resolution];
-        points[0] = startPosition;
-
-        float timeStep = 0.1f; // Waktu antar titik
-        Vector3 gravity = Physics2D.gravity;
-
-        for (int i = 1; i < resolution; i++)
-        {
-            float time = i * timeStep;
-            points[i] = startPosition + velocity * time + 0.5f * gravity * time * time;
-
-            // Periksa untuk memvisualisasikan pantulan
-            RaycastHit2D hit = Physics2D.Raycast(points[i - 1], points[i] - points[i - 1], Vector3.Distance(points[i - 1], points[i]));
-            if (hit.collider != null)
-            {
-                Vector3 reflectDir = Vector3.Reflect(points[i] - points[i - 1], hit.normal);
-                velocity = reflectDir;
-                startPosition = hit.point;
-                i--; // Pastikan melanjutkan dari titik pantulan
-            }
-        }
-
-        return points;
-    }
-
-    private void ClearAimingAndTrajectory()
+    private void ClearAimingLine()
     {
         if (aimLine != null)
         {
             aimLine.enabled = false;
-        }
-        if (trajectoryLine != null)
-        {
-            trajectoryLine.enabled = false;
         }
     }
 
@@ -153,9 +125,17 @@ public class Tembak : MonoBehaviour
                 Rigidbody2D rb = previewBubble.GetComponent<Rigidbody2D>();
                 if (rb != null)
                 {
-                    rb.isKinematic = true;
+                    rb.isKinematic = true; // Pastikan preview bubble tidak bergerak
                 }
             }
+        }
+    }
+
+    private void UpdatePreviewBubblePosition()
+    {
+        if (previewBubble != null)
+        {
+            previewBubble.transform.position = shootPoint.position; // Ikuti posisi shootPoint
         }
     }
 
