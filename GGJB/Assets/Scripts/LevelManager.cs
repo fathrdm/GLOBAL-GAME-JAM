@@ -11,6 +11,9 @@ public class LevelManager : MonoBehaviour
     public Transform bubblesArea; // Area tempat semua bubble berada
     public Grid grid; // Grid hexagonal yang digunakan
 
+    private List<Transform> connectedBubbles = new List<Transform>();
+    private List<Transform> bubblesToDrop = new List<Transform>();
+
     public List<GameObject> bubblesInScene;
     public List<string> colorsInScene;
     public List<GameObject> bubblesPrefabs;
@@ -58,6 +61,9 @@ public class LevelManager : MonoBehaviour
 
         // Periksa dan hancurkan bubble yang terhubung
         CheckAndDestroyMatchingBubbles(bubble);
+        MarkConnectedBubbles();
+        DropDisconnectedBubbles();
+
     }
 
     /// <summary>
@@ -84,7 +90,7 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Mendapatkan tetangga hexagonal dari bubble tertentu.
     /// </summary>
-    private List<Transform> GetHexagonalNeighbors(Transform bubble)
+    public List<Transform> GetHexagonalNeighbors(Transform bubble)
     {
         List<Transform> neighbors = new List<Transform>();
         Vector3Int cellPosition = grid.WorldToCell(bubble.position);
@@ -213,5 +219,83 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(LoadLevel(level));
     }
 
+    public void DropDisconnectedBubbles()
+    {
+        bubblesToDrop.Clear();
+
+        foreach (Transform bubble in bubblesArea)
+        {
+            Bubble bubbleScript = bubble.GetComponent<Bubble>();
+            if (!bubbleScript.isConnected)
+            {
+                bubblesToDrop.Add(bubble);
+            }
+        }
+
+        foreach (Transform bubble in bubblesToDrop)
+        {
+            bubble.SetParent(null);
+            Rigidbody2D rb = bubble.gameObject.AddComponent<Rigidbody2D>();
+            rb.gravityScale = 1; // Atur gravitasi agar bubble jatuh
+            Destroy(bubble.gameObject, 2f); // Hancurkan bubble setelah jatuh
+        }
+    }
+
+    private void MarkConnectedBubbles()
+    {
+        connectedBubbles.Clear();
+
+        foreach (Transform bubble in bubblesArea)
+        {
+            Bubble bubbleScript = bubble.GetComponent<Bubble>();
+            bubbleScript.isConnected = false; // Reset status koneksi
+        }
+
+        // Mulai dari bubble yang berada di bagian atas area
+        foreach (Transform bubble in bubblesArea)
+        {
+            Bubble bubbleScript = bubble.GetComponent<Bubble>();
+            if (bubbleScript != null && bubbleScript.isFixed)
+            {
+                MarkBubbleAndNeighbors(bubble);
+            }
+        }
+    }
+
+    private void MarkBubbleAndNeighbors(Transform bubble)
+    {
+        Queue<Transform> queue = new Queue<Transform>();
+        queue.Enqueue(bubble);
+
+        while (queue.Count > 0)
+        {
+            Transform current = queue.Dequeue();
+            Bubble currentScript = current.GetComponent<Bubble>();
+
+            if (currentScript != null && !currentScript.isConnected)
+            {
+                currentScript.isConnected = true;
+                connectedBubbles.Add(current);
+
+                foreach (Transform neighbor in GetHexagonalNeighbors(current))
+                {
+                    Bubble neighborScript = neighbor.GetComponent<Bubble>();
+                    if (neighborScript != null && !neighborScript.isConnected)
+                    {
+                        queue.Enqueue(neighbor);
+                    }
+                }
+            }
+        }
+    }
+
+    private void DebugConnectedBubbles()
+    {
+        foreach (Transform bubble in bubblesArea)
+        {
+            Bubble bubbleScript = bubble.GetComponent<Bubble>();
+            Debug.Log($"Bubble {bubble.name} connected: {bubbleScript.isConnected}");
+        }
+    }
 
 }

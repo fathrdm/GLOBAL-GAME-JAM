@@ -12,6 +12,7 @@ public class Bubble : MonoBehaviour
 
     public BubbleColor bubbleColor;
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if ((collision.gameObject.tag == "Bubble" && collision.gameObject.GetComponent<Bubble>().isFixed) || collision.gameObject.tag == "Limit")
