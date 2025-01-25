@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [Header("Panels")]
     [SerializeField] GameObject PausePanel;
     [SerializeField] GameObject GameOverPanel;
+    [SerializeField] GameObject settingsMenuPanel;
 
     private const int SEQUENCE_SIZE = 3; // Jumlah bubble minimum untuk meledak
 
@@ -40,8 +41,8 @@ public class GameManager : MonoBehaviour
         //buat panel
         PausePanel.SetActive(false);
         GameOverPanel.SetActive(false);
+        settingsMenuPanel.SetActive(false);
         isPause = false;
-
         isOver = false;
 
     }
@@ -64,35 +65,39 @@ public class GameManager : MonoBehaviour
             {
                 Time.timeScale = 1;
                 PausePanel.SetActive(false);
-            }
-            
+            }          
  
         }
-
-        //SoundManager.instance.UIClickSfx();
-
     }
     public void Restart()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("Level 1");
-        //SoundManager.instance.UIClickSfx();
 
     }
     public void GameResume()
     {
             PausePanel.SetActive(false);
-            Time.timeScale = 1;  
-        //SoundManager.instance.UIClickSfx();
-
+            Time.timeScale = 1;
     }
 
     public void BackToMenu()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("Main Menu");
-        //SoundManager.instance.UIClickSfx();
+    }
 
+    public void BackButton()
+    {
+        Time.timeScale = 0;
+        PausePanel.SetActive(true);
+        settingsMenuPanel.SetActive(false);
+    }
+
+    public void Settings()
+    {
+        Time.timeScale = 0;
+        settingsMenuPanel.SetActive(true);
     }
 
     public void ExitGame()

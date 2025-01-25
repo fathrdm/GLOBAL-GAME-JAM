@@ -45,42 +45,31 @@ public class MainMenuManager : MonoBehaviour
 
     }
 
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void LevelSelection()
     {
-        //GameData.instance.isSinglePlayer = true;
+
         levelSelection.SetActive(true);
         MainMenuPanel.SetActive(false);
-        //SoundManager.instance.UIClickSfx();
     }
 
     public void Settings()
     {
         Setting.SetActive(true);
         MainMenuPanel.SetActive(false);
-        //SoundManager.instance.UIClickSfx();
 
     }
 
     public void PlayButton()
     {
         SceneManager.LoadScene("Level 1");
-        //SoundManager.instance.UIClickSfx();
     }
     public void BackButton()
     {
-        MainMenuPanel.SetActive(true);
-        levelSelection.SetActive(false);
-        Setting.SetActive(false);
-
-        //SoundManager.instance.UIClickSfx();
-
+ 
+            MainMenuPanel.SetActive(true);
+            levelSelection.SetActive(false);
+            Setting.SetActive(false);
+        
     }
     public void ExitGame()
     {
