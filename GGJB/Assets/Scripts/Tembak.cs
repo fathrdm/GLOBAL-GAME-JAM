@@ -6,36 +6,47 @@ public class Tembak : MonoBehaviour
 {
     private Camera mainCam;
     private Vector3 mousePos;
-    public List<GameObject> bubblePrefabs; // Daftar prefab bubble dengan warna berbeda
-    public Transform shootPoint; // Tempat keluar bubble
+    public List<GameObject> bubblePrefabs;
+    public Transform shootPoint;
     public bool canFire = true;
     private float timer;
     public float timeBetweenFiring = 0.5f;
-    public float shootForce = 10f; // Kecepatan bubble
+    public float shootForce = 10f;
 
-    // Daftar warna yang tersedia di stage
     private List<Color> availableColors = new List<Color>();
-    private GameObject previewBubble; // Bubble yang ditampilkan sebelum ditembak
-    private GameObject selectedPrefab; // Prefab yang dipilih untuk ditembakkan
+    private GameObject previewBubble;
+    private GameObject selectedPrefab;
+
+    [Header("Aiming Line")]
+    public LineRenderer aimLine; // LineRenderer untuk aiming
+    public LineRenderer trajectoryLine; // LineRenderer untuk visualisasi trajectory
+    public int trajectoryResolution = 50; // Resolusi trajectory
 
     private void Start()
     {
         mainCam = Camera.main;
-        UpdateAvailableColors(); // Perbarui daftar warna saat permainan dimulai
+        UpdateAvailableColors();
+
+        // Pastikan LineRenderer diatur
+        if (aimLine != null)
+        {
+            aimLine.positionCount = 2;
+        }
+        if (trajectoryLine != null)
+        {
+            trajectoryLine.positionCount = trajectoryResolution;
+        }
     }
 
     private void Update()
     {
-        // Ambil posisi mouse
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
 
-        // Hitung rotasi shooter mengikuti mouse
         Vector3 direction = mousePos - transform.position;
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        rotZ = Mathf.Clamp(rotZ, 0f, 180f); // Batasi rotasi agar hanya ke atas
+        rotZ = Mathf.Clamp(rotZ, 0f, 180f);
         transform.rotation = Quaternion.Euler(0, 0, rotZ - 90f);
 
-        // Timer untuk menunggu waktu antar tembakan
         if (!canFire)
         {
             timer += Time.deltaTime;
@@ -46,19 +57,86 @@ public class Tembak : MonoBehaviour
             }
         }
 
-        // Tampilkan preview bubble saat menahan klik kiri
+        if (Input.GetMouseButton(0))
+        {
+            ShowAimingLine();
+            ShowTrajectory();
+        }
+        else
+        {
+            ClearAimingAndTrajectory();
+        }
+
         if (Input.GetMouseButtonDown(0) && canFire)
         {
             ShowPreviewBubble();
         }
 
-        // Luncurkan bubble saat melepas klik kiri
         if (Input.GetMouseButtonUp(0) && canFire)
         {
             canFire = false;
             ShootBubble();
-            Destroy(previewBubble); // Hapus bubble preview
-            UpdateAvailableColors(); // Perbarui daftar warna setelah menembak
+            Destroy(previewBubble);
+            ClearAimingAndTrajectory();
+            UpdateAvailableColors();
+        }
+    }
+
+    private void ShowAimingLine()
+    {
+        if (aimLine == null) return;
+
+        aimLine.SetPosition(0, shootPoint.position);
+        aimLine.SetPosition(1, mousePos);
+        aimLine.enabled = true;
+    }
+
+    private void ShowTrajectory()
+    {
+        if (trajectoryLine == null || selectedPrefab == null) return;
+
+        Vector3[] trajectoryPoints = CalculateTrajectoryPoints(shootPoint.position, transform.up * shootForce, trajectoryResolution);
+        trajectoryLine.positionCount = trajectoryPoints.Length;
+        trajectoryLine.SetPositions(trajectoryPoints);
+        trajectoryLine.enabled = true;
+    }
+
+    private Vector3[] CalculateTrajectoryPoints(Vector3 startPosition, Vector3 velocity, int resolution)
+    {
+        Vector3[] points = new Vector3[resolution];
+        points[0] = startPosition;
+
+        float timeStep = 0.1f; // Waktu antar titik
+        Vector3 gravity = Physics2D.gravity;
+
+        for (int i = 1; i < resolution; i++)
+        {
+            float time = i * timeStep;
+            points[i] = startPosition + velocity * time + 0.5f * gravity * time * time;
+
+            // Periksa untuk memvisualisasikan pantulan
+            RaycastHit2D hit = Physics2D.Raycast(points[i - 1], points[i] - points[i - 1], Vector3.Distance(points[i - 1], points[i]));
+            if (hit.collider != null)
+            {
+                Vector3 reflectDir = Vector3.Reflect(points[i] - points[i - 1], hit.normal);
+                velocity = reflectDir;
+                startPosition = hit.point;
+                i--; // Pastikan melanjutkan dari titik pantulan
+            }
+        }
+
+        return points;
+    }
+
+    private void ClearAimingAndTrajectory()
+    {
+        if (aimLine != null)
+        {
+            aimLine.enabled = false;
+        }
+        if (trajectoryLine != null)
+        {
+            trajectoryLine.enabled = false;
         }
     }
 
@@ -66,18 +144,12 @@ public class Tembak : MonoBehaviour
     {
         if (availableColors.Count > 0)
         {
-            // Pilih warna secara acak dari daftar
             Color randomColor = availableColors[Random.Range(0, availableColors.Count)];
-
-            // Cari prefab yang cocok dengan warna tersebut
             selectedPrefab = GetPrefabByColor(randomColor);
 
             if (selectedPrefab != null)
             {
-                // Buat preview bubble dari prefab yang dipilih
                 previewBubble = Instantiate(selectedPrefab, shootPoint.position, Quaternion.identity);
-
-                // Matikan rigidbody pada preview agar tidak bergerak
                 Rigidbody2D rb = previewBubble.GetComponent<Rigidbody2D>();
                 if (rb != null)
                 {
@@ -91,10 +163,7 @@ public class Tembak : MonoBehaviour
     {
         if (selectedPrefab != null)
         {
-            // Buat bubble baru dari prefab yang dipilih
             GameObject bubble = Instantiate(selectedPrefab, shootPoint.position, Quaternion.identity);
-
-            // Terapkan gaya agar bubble bergerak
             Rigidbody2D rb = bubble.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
@@ -105,7 +174,6 @@ public class Tembak : MonoBehaviour
 
     private GameObject GetPrefabByColor(Color color)
     {
-        // Cari prefab yang warnanya sesuai dengan warna yang diberikan
         foreach (GameObject prefab in bubblePrefabs)
         {
             SpriteRenderer renderer = prefab.GetComponent<SpriteRenderer>();
@@ -114,18 +182,13 @@ public class Tembak : MonoBehaviour
                 return prefab;
             }
         }
-        return null; // Jika tidak ada prefab yang cocok
+        return null;
     }
 
     private void UpdateAvailableColors()
     {
-        // Bersihkan daftar warna yang tersedia
         availableColors.Clear();
-
-        // Temukan semua objek di stage dengan komponen SpriteRenderer
         SpriteRenderer[] allRenderers = FindObjectsOfType<SpriteRenderer>();
-
-        // Tambahkan warna unik dari objek ke daftar availableColors
         foreach (SpriteRenderer renderer in allRenderers)
         {
             if (!availableColors.Contains(renderer.color))
