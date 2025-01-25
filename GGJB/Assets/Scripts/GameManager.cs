@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Panels")]
     [SerializeField] GameObject PausePanel;
-    private GameObject GameOverPanel;
+    public GameObject GameOverPanel;
     [SerializeField] GameObject settingsMenuPanel;
     [SerializeField] GameObject continuePanel;
 
