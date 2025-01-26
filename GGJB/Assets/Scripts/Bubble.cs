@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
-    public static Bubble instance;
     public float raycastRange = 0.15f;
     public float raycastOffset = 0.6f;
 
