@@ -291,7 +291,6 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        if (isOver) return; // Hindari pemanggilan berulang
         isOver = true;
         Time.timeScale = 0;
         GameOverPanel.SetActive(true);

@@ -4,9 +4,11 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 5; // Maksimum HP pemain
     private int currentHealth;
+    public GameObject GameOverPanel;
 
     private void Start()
     {
+        GameOverPanel.SetActive(false);
         currentHealth = maxHealth;
     }
 
@@ -31,7 +33,10 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Player has died!");
+        
+        Time.timeScale = 0;
+        GameOverPanel.SetActive(true);
+        Debug.Log("Game Over! Bubbles reached the limit.");
         // Tambahkan logika game over di sini
     }
 }
