@@ -41,7 +41,7 @@ public class EndingManager5 : MonoBehaviour
         {
             Ending = EndingStage.HappyEnding;
         }
-        else
+        else if(TimerMinit >= 3 && scoreToInt >= 20)
         {
             Ending = EndingStage.BadEnding;
         }
@@ -49,9 +49,11 @@ public class EndingManager5 : MonoBehaviour
         switch (Ending)
         {
             case EndingStage.HappyEnding:
+                Ending = EndingStage.HappyEnding;
                 Debug.Log("Happy");
                 break;
             case EndingStage.BadEnding:
+                Ending = EndingStage.BadEnding;
                 Debug.Log("BadEnding");
                 break;
         }
