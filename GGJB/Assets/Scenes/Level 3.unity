@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38655af68bcc5f64788a1ed23d40fcf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bubblesArea: {fileID: 7895915552445185074}
+  bubblesArea: {fileID: 1147393676}
   grid: {fileID: 70119749}
   bubblesInScene: []
   colorsInScene: []
@@ -282,11 +282,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubblePrefabs:
-  - {fileID: 879806158476945978, guid: 131a34a2624130e4fbbf32c9bf69bed7, type: 3}
-  - {fileID: 879806158476945978, guid: adfb7be5f839723489a3ddd82996531c, type: 3}
-  - {fileID: 879806158476945978, guid: d41668db9091dfa4fa9cad19b1a4ad1e, type: 3}
-  - {fileID: 879806158476945978, guid: c350baee6b077b1438a7eb6135b223bc, type: 3}
-  - {fileID: 879806158476945978, guid: b0235750972647c499452b7782d2831c, type: 3}
+  - {fileID: 879806158476945978, guid: 475fc4d5502776c42867a4e024655dcc, type: 3}
+  - {fileID: 879806158476945978, guid: 941d0c2cafc83404ea3102cb3839c6ae, type: 3}
+  - {fileID: 879806158476945978, guid: 7d0a1ee7fb22fd04680c19e90f506779, type: 3}
+  - {fileID: 879806158476945978, guid: cb79a2c7513b66d429761ff463e8ccb4, type: 3}
+  - {fileID: 879806158476945978, guid: 38d5f658d6618924984f344cf43c967c, type: 3}
   shootPoint: {fileID: 1088454546}
   canFire: 1
   timeBetweenFiring: 0.2
@@ -714,7 +714,7 @@ MonoBehaviour:
   - {fileID: 19049790}
   - {fileID: 1639930103}
   player: {fileID: 1731266136}
-  attackInterval: 8
+  attackInterval: 5
   moveSpeed: 8
   damage: 1
 --- !u!4 &323719804 stripped
@@ -962,7 +962,7 @@ Transform:
   m_GameObject: {fileID: 705078480}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.53, y: -4.34, z: 0}
+  m_LocalPosition: {x: -7.61, y: -3.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1331,6 +1331,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6953588037105296206, guid: cf22d2204120c5443882963d70958930, type: 3}
   m_PrefabInstance: {fileID: 7895915552445185072}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1147393675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1147393676}
+  m_Layer: 0
+  m_Name: BubbleArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1147393676
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147393675}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1301643071 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8712761733054148262, guid: cf22d2204120c5443882963d70958930, type: 3}
@@ -1848,7 +1879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ba90f468a37bc41a94f43f5a9a7001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 25
+  moveSpeed: 30
   boundaryX: 7.5
 --- !u!50 &1731266139
 Rigidbody2D:
@@ -2485,11 +2516,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6705054569484422538, guid: cf22d2204120c5443882963d70958930, type: 3}
   m_PrefabInstance: {fileID: 7895915552445185072}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &7895915552445185074 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6282940861352562694, guid: cf22d2204120c5443882963d70958930, type: 3}
-  m_PrefabInstance: {fileID: 7895915552445185072}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2501,6 +2527,7 @@ SceneRoots:
   - {fileID: 70119750}
   - {fileID: 311718795}
   - {fileID: 273493262}
+  - {fileID: 1147393676}
   - {fileID: 7895915552445185072}
   - {fileID: 385555521}
   - {fileID: 7696292114997618202}
