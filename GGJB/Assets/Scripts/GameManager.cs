@@ -112,7 +112,8 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("Level 1");
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 
     public void GameResume()
@@ -153,17 +154,6 @@ public class GameManager : MonoBehaviour
         continuePanel.SetActive(true);
     }
 
-    public void ContinueUnlockLevel()
-    {
-        SceneManager.LoadScene("Level 2");
-
-        if (SceneManager.GetActiveScene().buildIndex >= PlayerPrefs.GetInt("ReachedIndex"))
-        {
-            PlayerPrefs.SetInt("ReachedIndex", SceneManager.GetActiveScene().buildIndex + 1);
-            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
-            PlayerPrefs.Save();
-        }
-    }
 
     public void ProcessTurn(Transform currentBubble)
     {
