@@ -284,8 +284,13 @@ public class GameManager : MonoBehaviour
 
     private void CheckGameOverCondition()
     {
+        // Jika permainan sudah berakhir, langsung keluar
+        if (isOver || gameOverLimit == null)
+            return;
+
         foreach (Transform bubble in activeBubbles)
         {
+            // Cek jika bubble melewati batas
             if (bubble.position.y <= gameOverLimit.position.y)
             {
                 GameOver();
@@ -296,11 +301,13 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        if (isOver) return; // Hindari pemanggilan berulang
         isOver = true;
         Time.timeScale = 0;
         GameOverPanel.SetActive(true);
         Debug.Log("Game Over! Bubbles reached the limit.");
     }
+
 
     private void CheckWinCondition(int childCount)
     {
