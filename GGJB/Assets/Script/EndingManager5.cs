@@ -116,7 +116,6 @@ public class EndingManager5 : MonoBehaviour
             {
                 Time.timeScale = 1;
                 PausePanel.SetActive(false);
-                audiorain.UnPause();
             }
         }
     }
@@ -131,6 +130,8 @@ public class EndingManager5 : MonoBehaviour
     {
         PausePanel.SetActive(false);
         Time.timeScale = 1;
+        audiorain.UnPause();
+
     }
 
     public void BackToMenu()
