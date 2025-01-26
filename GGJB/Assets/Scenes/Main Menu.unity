@@ -3384,7 +3384,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1935752357}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1786942769}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: LevelSelection
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1935752357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3640,27 +3652,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 603395819220418446, guid: ef02ee61cd6f9154bb406c03f7f218a5, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 603395819220418446, guid: ef02ee61cd6f9154bb406c03f7f218a5, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 603395819220418446, guid: ef02ee61cd6f9154bb406c03f7f218a5, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1323780013842185025, guid: ef02ee61cd6f9154bb406c03f7f218a5, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1323780013842185025, guid: ef02ee61cd6f9154bb406c03f7f218a5, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1323780013842185025, guid: ef02ee61cd6f9154bb406c03f7f218a5, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1532614902257022567, guid: ef02ee61cd6f9154bb406c03f7f218a5, type: 3}
       propertyPath: m_Color.a
@@ -3768,11 +3780,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 62de30d60819c6b47aef1d465dfeeb60, type: 3}
     - target: {fileID: 6237841066771591948, guid: ef02ee61cd6f9154bb406c03f7f218a5, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6237841066771591948, guid: ef02ee61cd6f9154bb406c03f7f218a5, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6336140565432364393, guid: ef02ee61cd6f9154bb406c03f7f218a5, type: 3}
       propertyPath: m_Name
@@ -3780,15 +3792,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6336140565432364393, guid: ef02ee61cd6f9154bb406c03f7f218a5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8264606571181915978, guid: ef02ee61cd6f9154bb406c03f7f218a5, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8264606571181915978, guid: ef02ee61cd6f9154bb406c03f7f218a5, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8833784961782221459, guid: ef02ee61cd6f9154bb406c03f7f218a5, type: 3}
       propertyPath: m_Name

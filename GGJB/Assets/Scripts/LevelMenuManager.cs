@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public class LevelMenuManager : MonoBehaviour
 {
     public Button[] button;
-
+    private SFXManager sfxmanager;
     private void Awake()
     {
         int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
@@ -20,8 +21,14 @@ public class LevelMenuManager : MonoBehaviour
             button[i].interactable = true;
         }
     }
+
+    private void Start()
+    {
+        sfxmanager = FindObjectOfType<SFXManager>();
+    }
     public void OpenLevel(int levelId)
     {
+        sfxmanager.UIClickSfx();
         string levelname = "Level " + levelId;
         SceneManager.LoadScene(levelname);
     }
