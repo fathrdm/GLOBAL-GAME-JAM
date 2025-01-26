@@ -505,8 +505,7 @@ Transform:
   - {fileID: 705078481}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
-=======
+
 --- !u!1 &592777982
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,7 +687,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> Stashed changes
 --- !u!1 &671412423
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,8 +786,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 385555521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &742723527
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,7 +1042,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948242231}
   m_CullTransparentMesh: 1
->>>>>>> Stashed changes
 --- !u!1 &971163282
 GameObject:
   m_ObjectHideFlags: 0
@@ -2118,8 +2113,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-<<<<<<< Updated upstream
-=======
+
 --- !u!1 &1999671138
 GameObject:
   m_ObjectHideFlags: 0
@@ -2377,7 +2371,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2084867031}
   m_CullTransparentMesh: 1
->>>>>>> Stashed changes
 --- !u!1001 &2099349721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2461,9 +2454,6 @@ SceneRoots:
   - {fileID: 378594254}
   - {fileID: 971163284}
   - {fileID: 1245208151}
-<<<<<<< Updated upstream
-=======
   - {fileID: 933248602}
   - {fileID: 1999671142}
   - {fileID: 604911112}
->>>>>>> Stashed changes
