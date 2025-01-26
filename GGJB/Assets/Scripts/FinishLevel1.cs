@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class FinishPoinPerLevel : MonoBehaviour
 {
+
+    public void toCutscene()
+    {
+        SceneManager.LoadScene("Cutscene2");
+    }
     public void ContinueUnlockLevel()
     {
 

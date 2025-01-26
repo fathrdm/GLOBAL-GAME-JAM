@@ -304,7 +304,6 @@ public class GameManager : MonoBehaviour
         isOver = true;
         Time.timeScale = 0;
         GameOverPanel.SetActive(true);
-        Debug.Log("Game Over! Bubbles reached the limit.");
     }
 
 
@@ -320,6 +319,5 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         continuePanel.SetActive(true);
-        Debug.Log("You Win! All bubbles are cleared.");
     }
 }
