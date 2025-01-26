@@ -11,7 +11,6 @@ public class cutsceneManager1 : MonoBehaviour
     {
         cutsceneAnimator = GetComponent<Animator>();
         nextLevelButton.SetActive(false);
-        cutsceneAnimator.Play("cs2");
     }
 
     public void ShowButton()

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class FinishPoinPerLevel : MonoBehaviour
+public class FinishLevel1 : MonoBehaviour
 {
 
     public void toCutscene()
     {
-        SceneManager.LoadScene("Cutscene2");
+        SceneManager.LoadScene(3);
     }
     public void ContinueUnlockLevel()
     {
