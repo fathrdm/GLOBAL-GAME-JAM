@@ -20,6 +20,7 @@ public class MainMenuManager : MonoBehaviour
     public void LevelSelection()
     {
         sfxmanager.UIClickSfx();
+        SceneManager.LoadScene("CutScene1");
     }
 
     public void Settings()
@@ -33,7 +34,7 @@ public class MainMenuManager : MonoBehaviour
     public void PlayButton()
     {
         sfxmanager.UIClickSfx();
-        SceneManager.LoadScene("Level 1");
+        SceneManager.LoadScene("CutScene1");
     }
     public void BackButton()
     {
@@ -45,5 +46,12 @@ public class MainMenuManager : MonoBehaviour
     {
         sfxmanager.UIClickSfx();
         Application.Quit();
+    }
+
+    public void ResetButton()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+        Debug.Log("PlayerPrefs telah direset.");
     }
 }

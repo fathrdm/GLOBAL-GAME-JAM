@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class FinishLevel2 : MonoBehaviour
+public class ToScene2 : MonoBehaviour
 {
-
-    public void toCutscene()
+    public void toscene2()
     {
-        SceneManager.LoadScene("CutScene3");
+        SceneManager.LoadScene("CutScene2");
+
     }
+
 }

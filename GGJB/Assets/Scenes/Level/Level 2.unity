@@ -427,52 +427,6 @@ MonoBehaviour:
   continuePanel: {fileID: 1447702198}
   gameOverLimit: {fileID: 705078481}
   gameState: play
---- !u!1 &378594252
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 378594254}
-  - component: {fileID: 378594253}
-  m_Layer: 0
-  m_Name: 'PauseMenuSliders '
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &378594253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 378594252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 045c227be41d79645848f73d339b878b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeSlider: {fileID: 1447702203}
-  sfxSlider: {fileID: 1447702202}
---- !u!4 &378594254
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 378594252}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 182.56697, y: 314.70096, z: -2.194664}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &385555520
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,11 +459,6 @@ Transform:
   - {fileID: 705078481}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &450307916 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7346069382084416780, guid: 0d5baa5e8879e7c4184734240a572d12, type: 3}
-  m_PrefabInstance: {fileID: 1447702197}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &604911109
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +664,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 385555521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &942471565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 942471567}
+  - component: {fileID: 942471566}
+  m_Layer: 0
+  m_Name: 'PauseMenuSliders '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!114 &942471566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942471565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045c227be41d79645848f73d339b878b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 1447702203}
+  sfxSlider: {fileID: 1447702202}
+--- !u!4 &942471567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942471565}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 182.56697, y: 314.70096, z: -2.194664}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &971163282
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,7 +781,7 @@ Transform:
   m_GameObject: {fileID: 1088454545}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 17.1, z: 0}
+  m_LocalPosition: {x: 0, y: 22.9, z: 0}
   m_LocalScale: {x: 0.23, y: 0.23, z: 0.23}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1249,10 +1244,22 @@ PrefabInstance:
     - target: {fileID: 3757412534432614338, guid: 0d5baa5e8879e7c4184734240a572d12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 450307916}
+      objectReference: {fileID: 971163285}
     - target: {fileID: 3757412534432614338, guid: 0d5baa5e8879e7c4184734240a572d12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757412534432614338, guid: 0d5baa5e8879e7c4184734240a572d12, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: toCutscene
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757412534432614338, guid: 0d5baa5e8879e7c4184734240a572d12, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FinishLevel2, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757412534432614338, guid: 0d5baa5e8879e7c4184734240a572d12, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4331722069369762183, guid: 0d5baa5e8879e7c4184734240a572d12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1276,7 +1283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5214035845014519383, guid: 0d5baa5e8879e7c4184734240a572d12, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6117571099952187842, guid: 0d5baa5e8879e7c4184734240a572d12, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1882,7 +1889,7 @@ SceneRoots:
   - {fileID: 2099349721}
   - {fileID: 1447702197}
   - {fileID: 311718795}
-  - {fileID: 378594254}
   - {fileID: 971163284}
   - {fileID: 1245208151}
   - {fileID: 604911112}
+  - {fileID: 942471567}
