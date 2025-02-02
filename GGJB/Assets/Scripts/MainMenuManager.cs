@@ -6,8 +6,11 @@ using TMPro;
 public class MainMenuManager : MonoBehaviour
 {
     [Header("Main Menu Panel List")]
-    public GameObject MainMenuPanel;
-    public GameObject Setting;
+    [SerializeField] GameObject MainMenuPanel;
+    [SerializeField] GameObject Setting;
+    [SerializeField] GameObject creditsPanel;
+    [SerializeField] AnimationCredits animationCredits;
+
     //private GameObject levelSelection;
     private AudioSource audioSource;
     private SFXManager sfxmanager;
@@ -15,6 +18,7 @@ public class MainMenuManager : MonoBehaviour
     {
         MainMenuPanel.SetActive(true);
         Setting.SetActive(false);
+        creditsPanel.SetActive(false);
         sfxmanager = FindObjectOfType<SFXManager>();
     }
     public void LevelSelection()
@@ -23,6 +27,13 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene("CutScene1");
     }
 
+    public void Credits()
+    {
+        sfxmanager.UIClickSfx();
+        creditsPanel.SetActive(true);
+        MainMenuPanel.SetActive(false);
+        animationCredits.PlayAnimation();
+    }
     public void Settings()
     {
         sfxmanager.UIClickSfx();
@@ -38,9 +49,10 @@ public class MainMenuManager : MonoBehaviour
     }
     public void BackButton()
     {
-          MainMenuPanel.SetActive(true);
+        MainMenuPanel.SetActive(true);
         sfxmanager.UIClickSfx();
         Setting.SetActive(false);
+        creditsPanel.SetActive(false);
     }
     public void ExitGame()
     {
@@ -52,6 +64,5 @@ public class MainMenuManager : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
-        Debug.Log("PlayerPrefs telah direset.");
     }
 }
